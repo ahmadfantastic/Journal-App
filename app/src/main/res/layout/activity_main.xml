@@ -18,7 +18,7 @@
             android:layout_width="60dp"
             android:layout_height="60dp"
             tools:src="@color/colorAccent"
-            android:contentDescription="d"/>
+            android:contentDescription="@string/description_image"/>
 
         <LinearLayout
             android:layout_width="0dp"

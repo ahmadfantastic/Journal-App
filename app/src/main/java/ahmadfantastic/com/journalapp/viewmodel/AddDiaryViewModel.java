@@ -10,7 +10,7 @@ public class AddDiaryViewModel extends ViewModel {
 
     private LiveData<DiaryEntry> diary;
 
-    public AddDiaryViewModel(AppDatabase database, int diaryId) {
+    AddDiaryViewModel(AppDatabase database, int diaryId) {
         diary = database.diaryDao().loadDiaryById(diaryId);
     }
 

@@ -3,8 +3,6 @@ package ahmadfantastic.com.journalapp;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -27,8 +25,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
-import java.io.IOException;
-import java.net.URL;
 import java.util.List;
 
 import ahmadfantastic.com.journalapp.database.AppDatabase;
@@ -57,23 +53,6 @@ public class MainActivity extends AppCompatActivity {
 
         nameTextView.setText(account != null ? account.getDisplayName() : null);
         emailTextView.setText(account != null ? account.getEmail() : null);
-        AppExecutors.getInstance().networkIO().execute(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    final Bitmap bitmap = BitmapFactory.decodeStream(new URL(
-                            account.getPhotoUrl().toString()).openConnection().getInputStream());
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            pictureImageView.setImageBitmap(bitmap);
-                        }
-                    });
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
@@ -127,7 +106,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        MainViewModelFactory viewModelFactory = new MainViewModelFactory(mDb, account != null ? account.getEmail() : null);
+        MainViewModelFactory viewModelFactory = new MainViewModelFactory(mDb,
+                account != null ? account.getEmail() : null, account != null ? account.getPhotoUrl() : null);
         MainViewModel viewModel = ViewModelProviders.of(this, viewModelFactory).get(MainViewModel.class);
         viewModel.getJournal().observe(this, new Observer<List<DiaryEntry>>() {
             @Override
@@ -135,6 +115,7 @@ public class MainActivity extends AppCompatActivity {
                 mAdapter.setJournal(journal);
             }
         });
+        pictureImageView.setImageBitmap(viewModel.getImage());
     }
 
     @Override

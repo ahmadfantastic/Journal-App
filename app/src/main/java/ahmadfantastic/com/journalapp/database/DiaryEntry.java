@@ -73,14 +73,4 @@ public class DiaryEntry {
         this.date = date;
     }
 
-    @Override
-    public String toString() {
-        return "DiaryEntry{" +
-                "id=" + id +
-                ", owner='" + owner + '\'' +
-                ", title='" + title + '\'' +
-                ", content='" + content + '\'' +
-                ", date=" + date +
-                '}';
-    }
 }

@@ -3,8 +3,6 @@ package ahmadfantastic.com.journalapp;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.NavUtils;
@@ -16,8 +14,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -26,10 +22,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.sql.Timestamp;
 import java.util.Date;
 
 import ahmadfantastic.com.journalapp.database.AppDatabase;
@@ -67,7 +59,8 @@ public class AddDiaryActivity extends AppCompatActivity {
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addDiary(titleField.getText().toString(), contentField.getText().toString(), account.getEmail());
+                addDiary(titleField.getText().toString(), contentField.getText().toString(),
+                        account != null ? account.getEmail() : null);
             }
         });
 
@@ -84,7 +77,7 @@ public class AddDiaryActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         if (intent != null && intent.hasExtra(EXTRA_DIARY_ID)) {
-            addButton.setText("Update");
+            addButton.setText(R.string.prompt_update);
             if (mDiaryId == DEFAULT_DIARY_ID) {
                 mDiaryId = intent.getIntExtra(EXTRA_DIARY_ID, DEFAULT_DIARY_ID);
 

@@ -3,4 +3,12 @@
 
     <string name="server_client_id">284027905949-b78tttc8dj1pecjhv9bgoqh697o0nfk7.apps.googleusercontent.com</string>
     <string name="error_sign_in">Failed to Sign in</string>
+    <string name="prompt_add">Add</string>
+    <string name="prompt_update">Update</string>
+    <string name="description_image">Google Account Image</string>
+    <string name="prompt_sign_out">Sign out</string>
+    <string name="activity_login_title">Login</string>
+    <string name="activity_add_title">Diary</string>
+    <string name="hint_title">Title</string>
+    <string name="hint_content">Content</string>
 </resources>

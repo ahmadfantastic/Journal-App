@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -18,7 +17,6 @@ import com.google.android.gms.tasks.Task;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private static final String TAG = LoginActivity.class.getSimpleName();
     private static final int REQUEST_CODE_SIGN_IN = 758;
 
     private GoogleSignInClient mGoogleSignInClient;
@@ -62,12 +60,11 @@ public class LoginActivity extends AppCompatActivity {
         if (requestCode == REQUEST_CODE_SIGN_IN) {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             try {
-                GoogleSignInAccount account = task.getResult(ApiException.class);
+                task.getResult(ApiException.class);
                 Intent intent = new Intent(this, MainActivity.class);
                 startActivity(intent);
                 finish();
             } catch (ApiException e) {
-                Log.w(TAG, "signInResult:failed code=" + e.getStatusCode());
                 Toast.makeText(this, R.string.error_sign_in, Snackbar.LENGTH_LONG).show();
             }
         }
