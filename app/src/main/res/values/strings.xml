@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">Journal App</string>
+
+    <string name="server_client_id">284027905949-b78tttc8dj1pecjhv9bgoqh697o0nfk7.apps.googleusercontent.com</string>
+    <string name="error_sign_in">Failed to Sign in</string>
 </resources>
